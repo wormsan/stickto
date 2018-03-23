@@ -9,38 +9,63 @@
         html,body {
             margin: 0;
         }
-        .f1,.f2,.f3 {
+        .sticker {
             background: #eeff43;
+            height: 4rem;
+            line-height: 4rem;
+            width: 100%;
         }
     </style>
 </head>
 <body style="background:#efefef;height:10000px;">
     <!-- <div class="aaa">-------------------------</div> -->
-    <div class="f1">ffffffffffffffff</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="f2">sssssssssssssssss</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="f3">wwwwwwwwwwwwwwwww</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="aaa">---------------------------</div>
-    <div class="f4">qqqqq</div>
-    <button onclick="fff">unstick f1</button>
+    <div class="sticker sticker1">sticker sticker1</div>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <div class="sticker sticker2">sticker sticker2</div>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <div class="sticker sticker3">sticker sticker3</div>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <div class="sticker sticker4">sticker sticker4</div>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <p>---------------------------</p>
+    <button onclick="unstickStick2()">unstick sticker2</button>
     <script type="module">
-        import {stick} from './index.js'
-        const f1 = stick(document.querySelector('.f1'))
-        const f2 = stick(document.querySelector('.f2'))
-        const f3 = stick(document.querySelector('.f3'))
-        const f4 = stick(document.querySelector('.f4'))
-        window.fff = function () {
-            unstick(f1)
+        import {stick, unstick} from './index.js'
+        const sticker1 = stick(document.querySelector('.sticker1'))
+        const sticker2 = stick(document.querySelector('.sticker2'))
+        const sticker3 = stick(document.querySelector('.sticker3'))
+        const sticker4 = stick(document.querySelector('.sticker4'))
+        window.unstickStick2 = function () {
+            unstick(sticker2)
         }
     </script>
 </body>
