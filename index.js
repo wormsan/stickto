@@ -2,7 +2,7 @@
  * @Author: zhaoye 
  * @Date: 2018-01-17 15:06:07 
  * @Last Modified by: zhaoye
- * @Last Modified time: 2018-03-23 19:42:18
+ * @Last Modified time: 2018-03-23 22:21:58
  */
 import Sticker from './Sticker.js'
 

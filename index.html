@@ -58,8 +58,9 @@
     <p>---------------------------</p>
     <p>---------------------------</p>
     <button onclick="unstickStick2()">unstick sticker2</button>
-    <script type="module">
-        import {stick, unstick} from './index.js'
+    <script src="./dist/stickto.js"></script>
+    <script>
+        const {stick, unstick} = stickto
         const sticker1 = stick(document.querySelector('.sticker1'))
         const sticker2 = stick(document.querySelector('.sticker2'))
         const sticker3 = stick(document.querySelector('.sticker3'))
