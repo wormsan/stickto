@@ -17,12 +17,16 @@
         }
         .sticker1 {
             background: red;
+            height: 5rem;
+            line-height: 5rem;
         }
         .sticker2 {
             background: aqua;
         }
         .sticker3 {
             background: darkcyan;
+            height: 2rem;
+            line-height: 2rem;
         }
         .sticky {
             background: rgb(235, 16, 255);
@@ -84,7 +88,6 @@
             zIndex: 1000,
         })
         const sticker4 = stick(document.querySelector('.sticker4'))
-        console.log(sticker2)
         window.unstickStick2 = function () {
             unstick(sticker2)
         }

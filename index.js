@@ -2,7 +2,7 @@
  * @Author: zhaoye 
  * @Date: 2018-01-17 15:06:07 
  * @Last Modified by: zhaoye
- * @Last Modified time: 2018-03-24 12:02:56
+ * @Last Modified time: 2018-03-24 12:29:05
  */
 import Sticker from './Sticker.js'
 
@@ -11,18 +11,22 @@ let stickers = []
 function juedge () {
     if (stickers.length == 0) return
     let sticking
+    let possibleDanger
     let danger
     let switching
     for (let i = 0; i < stickers.length; i++) {
         const sticker = stickers[i]
-        if (sticker.isInDangerZone()) {
-            danger = sticker
-        }
         if (!sticking && sticker.shouldStick()) {
             sticking = sticker
+            if (stickers[i - 1]) {
+                possibleDanger = stickers[i - 1]
+            }
         } else {
             sticker.unstick()
         }
+    }
+    if (sticking && possibleDanger && possibleDanger.isInDangerZone(sticking)) {
+        danger = possibleDanger
     }
     if (sticking) {
         sticking.stick()

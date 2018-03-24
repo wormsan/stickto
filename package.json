@@ -1,8 +1,8 @@
 {
   "name": "stickto",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "make elements stick to top automatically(多dom自动吸顶库)",
-  "main": "index.js",
+  "main": "dist/stickto.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

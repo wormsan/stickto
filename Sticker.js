@@ -2,7 +2,7 @@
  * @Author: zhaoye 
  * @Date: 2018-03-23 18:06:08 
  * @Last Modified by: zhaoye
- * @Last Modified time: 2018-03-24 12:04:32
+ * @Last Modified time: 2018-03-24 12:41:01
  */
 
 let cid = -1
@@ -16,7 +16,7 @@ export default class Sticker {
         if (zIndex) {
             this.zIndex = zIndex
         }
-        this.className = 'stickto-auto-generated-sticky'
+        this.className = 'stickto-auto-generated-sticker'
         if (className) {
             this.className = className.trim()
         }
@@ -26,7 +26,7 @@ export default class Sticker {
             zIndex: $elStyle.zIndex,
         }
         this.$holder = document.createElement('div')
-        this.$holder.className = `auto-generated-stick-holder auto-generated-stick-holder-${this.cid}`
+        this.$holder.className = `stickto-auto-generated-stick-holder stickto-auto-generated-stick-holder-${this.cid}`
 
         this.$el.parentNode.insertBefore(this.$holder, this.$el)
     }
@@ -37,7 +37,7 @@ export default class Sticker {
         return Number(window.getComputedStyle(this.$el).height.split('px')[0])
     }
     smoothSwitch (replacer) {
-        this.$el.style.transform = `translate3d(0,${replacer.getBoundingClientRect().top - replacer.getHeight()}px,0)`
+        this.$el.style.transform = `translate3d(0,${replacer.getBoundingClientRect().top - this.getHeight()}px,0)`
     }
     copyStyle (style1, style2, name) {
         if (style1[name] !== style2[name])
@@ -51,9 +51,9 @@ export default class Sticker {
         this.$el = null
         cid--
     }
-    isInDangerZone () {
+    isInDangerZone (sticking) {
         const holderRect = this.$holder.getBoundingClientRect()
-        const height = Number(window.getComputedStyle(this.$el).height.split('px')[0])
+        const height = Number(window.getComputedStyle(sticking.$el).height.split('px')[0])
         if (holderRect.top > 0 && holderRect.top < height)
             return true
         else
