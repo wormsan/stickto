@@ -6,7 +6,7 @@
 
 当你有多个DOM元素的时候，`stickto`可以帮助多个DOM元素之间平滑切换吸顶。
 
-[Demo transport](http://docs.gomeminus.com/stickto/)
+[Demo 传送门](http://docs.gomeminus.com/stickto/)
 
 ![demo.gif](demo.gif)
 
