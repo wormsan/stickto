@@ -15,6 +15,18 @@
             line-height: 4rem;
             width: 100%;
         }
+        .sticker1 {
+            background: red;
+        }
+        .sticker2 {
+            background: aqua;
+        }
+        .sticker3 {
+            background: darkcyan;
+        }
+        .sticky {
+            background: rgb(235, 16, 255);
+        }
     </style>
 </head>
 <body style="background:#efefef;height:10000px;">
@@ -61,10 +73,18 @@
     <script src="./dist/stickto.js"></script>
     <script>
         const {stick, unstick} = stickto
-        const sticker1 = stick(document.querySelector('.sticker1'))
-        const sticker2 = stick(document.querySelector('.sticker2'))
-        const sticker3 = stick(document.querySelector('.sticker3'))
+        const sticker1 = stick(document.querySelector('.sticker1'), {
+            className: 'sticky',
+        })
+        const sticker2 = stick(document.querySelector('.sticker2'), {
+            zIndex: 200,
+        })
+        const sticker3 = stick(document.querySelector('.sticker3'), {
+            className: 'sticky',
+            zIndex: 1000,
+        })
         const sticker4 = stick(document.querySelector('.sticker4'))
+        console.log(sticker2)
         window.unstickStick2 = function () {
             unstick(sticker2)
         }

@@ -2,28 +2,28 @@
  * @Author: zhaoye 
  * @Date: 2018-01-17 15:06:07 
  * @Last Modified by: zhaoye
- * @Last Modified time: 2018-03-23 22:21:58
+ * @Last Modified time: 2018-03-24 12:02:56
  */
 import Sticker from './Sticker.js'
 
-const stickQueue = []
+let stickers = []
 
 function juedge () {
-    if (stickQueue.length == 0) return
+    if (stickers.length == 0) return
     let sticking
     let danger
-    for (let i = 0; i < stickQueue.length; i++) {
-        const sticker = stickQueue[i]
-        if (sticker.shouldStick(sticker)) {
+    let switching
+    for (let i = 0; i < stickers.length; i++) {
+        const sticker = stickers[i]
+        if (sticker.isInDangerZone()) {
+            danger = sticker
+        }
+        if (!sticking && sticker.shouldStick()) {
             sticking = sticker
-            break
+        } else {
+            sticker.unstick()
         }
     }
-    stickQueue.forEach(sticker => {
-        sticker.unstick()
-        if (sticker.isInDangerZone())
-            danger = sticker
-    })
     if (sticking) {
         sticking.stick()
     }
@@ -33,28 +33,26 @@ function juedge () {
 }
 
 function stick ($el, {
-    useClass,
+    className,
     zIndex,
 } = {}) {
     juedge()
-    const sticker = new Sticker($el, useClass, zIndex)
-    stickQueue.unshift(sticker)
+    const sticker = new Sticker($el, className, zIndex)
+    stickers.unshift(sticker)
+    return sticker
 }
 
-function unstick (sticker) {
-    if (sticker instanceof Sticker) {
-        sticker.destroy()
-        stickQueue.pop(sticker)
-    } else {
-        for (let i = 0; i < stickQueue.length; i++) {
-            if (sticker.$el == sticker) {
-                const sticker = stickQueue[i]
-                sticker.destroy()
-                stickQueue.pop(sticker)
-                break
-            }
+function unstick (targetSticker) {
+    stickers = stickers.filter(sticker => {
+        if (targetSticker instanceof Sticker && sticker == targetSticker) {
+            targetSticker.destroy()
+            return false
+        } else if (sticker.$el == targetSticker) {
+            sticker.destroy()
+            return false
         }
-    }
+        return true
+    })
 }
 
 document.addEventListener('scroll', juedge)

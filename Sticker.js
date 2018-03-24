@@ -2,30 +2,31 @@
  * @Author: zhaoye 
  * @Date: 2018-03-23 18:06:08 
  * @Last Modified by: zhaoye
- * @Last Modified time: 2018-03-23 19:04:44
+ * @Last Modified time: 2018-03-24 12:04:32
  */
-let cid = 0
+
+let cid = -1
 export default class Sticker {
-    constructor ($el, useClass, zIndex) {
+    constructor ($el, className, zIndex) {
         cid++
+        this.cid = cid
         this.$el = $el
         const $elStyle = window.getComputedStyle($el)
         this.zIndex = '20'
         if (zIndex) {
             this.zIndex = zIndex
         }
-        this.classCache = ''
-        if (useClass) {
-            this.classCache = useClass
-        } else {
-            this.styleCache = {
-                position: $elStyle.position,
-                top: $elStyle.top,
-                zIndex: $elStyle.zIndex,
-            }
+        this.className = 'stickto-auto-generated-sticky'
+        if (className) {
+            this.className = className.trim()
+        }
+        this.styleCache = {
+            position: $elStyle.position,
+            top: $elStyle.top,
+            zIndex: $elStyle.zIndex,
         }
         this.$holder = document.createElement('div')
-        this.$holder.className = `auto-generated-stick-holder auto-generated-stick-holder-${cid}`
+        this.$holder.className = `auto-generated-stick-holder auto-generated-stick-holder-${this.cid}`
 
         this.$el.parentNode.insertBefore(this.$holder, this.$el)
     }
@@ -36,14 +37,14 @@ export default class Sticker {
         return Number(window.getComputedStyle(this.$el).height.split('px')[0])
     }
     smoothSwitch (replacer) {
-        this.$el.style.transform = `translateY(${replacer.getBoundingClientRect().top - replacer.getHeight()}px)`
+        this.$el.style.transform = `translate3d(0,${replacer.getBoundingClientRect().top - replacer.getHeight()}px,0)`
     }
     copyStyle (style1, style2, name) {
-        if (style1[name] != style2[name]) {
+        if (style1[name] !== style2[name])
             style1[name] = style2[name]
-        }
     }
     destroy () {
+        this.unstick()
         this.$holder.parentNode.removeChild(this.$holder)
         this.$holder = null
         this.styleCache = null
@@ -51,17 +52,17 @@ export default class Sticker {
         cid--
     }
     isInDangerZone () {
-        let $el = this.$el
-        if (this.$holder.style.position == 'fixed') 
-            $el = this.$holder
-        const holderRect = $el.getBoundingClientRect()
-        if (holderRect.top > 0 && holderRect.top < Number(window.getComputedStyle($el).height.split('px')[0]))
+        const holderRect = this.$holder.getBoundingClientRect()
+        const height = Number(window.getComputedStyle(this.$el).height.split('px')[0])
+        if (holderRect.top > 0 && holderRect.top < height)
             return true
         else
             return false
     }
     shouldStick () {
         const holderRect = this.$holder.getBoundingClientRect()
+        const height = Number(window.getComputedStyle(this.$el).height.split('px')[0])
+        
         if (holderRect.top <= 0)
             return true
         else
@@ -77,12 +78,20 @@ export default class Sticker {
         this.copyStyle(this.$el.style, stickyStyle, 'position')
         this.copyStyle(this.$el.style, stickyStyle, 'top')
         this.copyStyle(this.$el.style, stickyStyle, 'zIndex')
+        this.copyStyle(this.$el.style, {transform: 'translate3d(0,0,0)'}, 'transform')
+        if (this.className && !this.$el.className.match(new RegExp(this.className))) {
+            this.$el.className += ` ${this.className}`
+        }
     }
     unstick () {
+        const reg = new RegExp(` ${this.className}`, 'g')
         this.copyStyle(this.$el.style, this.styleCache, 'position')
         this.copyStyle(this.$el.style, this.styleCache, 'top')
         this.copyStyle(this.$el.style, this.styleCache, 'zIndex')
         this.copyStyle(this.$holder.style, {height: '0px'}, 'height')
-        this.copyStyle(this.$el.style, {transform: 'translateY(0px)'}, 'transform')
+        this.copyStyle(this.$el.style, {transform: 'translate3d(0,0,0)'}, 'transform')
+        if (this.className && this.$el.className.match(reg)) {
+            this.$el.className = this.$el.className.replace(reg, '')
+        }
     }
 }
