@@ -1,4 +1,7 @@
 # stickto
+
+[简体中文](./README.zh-CN.md)
+
 make elements stick to top automatically(多dom自动吸顶库)
 
 **Stickto** is a small lib that helps DOM nodes stick to top of viewport automatically.
@@ -62,7 +65,7 @@ unstick(/* sticker or DOM */)
 
 tells `stickto` there's a DOM node that needs to stick to viewport top automatically.
 
-```
+```js
 var stiker = stick(DOM[, options])
 ```
 
@@ -81,7 +84,7 @@ stick(document.querySelector('#foo'))
 
 * options
     * type: Object
-    * description: set `z-index` and/or css class name when sticker is sticking at top
+    * description: customize `z-index` and/or css class name when sticker is sticking at top
     * optional: yes
     * default: `{zIndex: 20, className: 'stickto-auto-generated-sticker'}`
     * zIndex
@@ -137,6 +140,7 @@ unstick(sticker)
 
 eg:
 
+recommand
 ```js
 const sticker = stick(document.querySelector('#foo'))
 unstick(sticker)
