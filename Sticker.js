@@ -2,7 +2,7 @@
  * @Author: zhaoye 
  * @Date: 2018-03-23 18:06:08 
  * @Last Modified by: zhaoye
- * @Last Modified time: 2018-03-24 12:41:01
+ * @Last Modified time: 2018-04-08 23:31:14
  */
 
 let cid = -1
@@ -37,7 +37,7 @@ export default class Sticker {
         return Number(window.getComputedStyle(this.$el).height.split('px')[0])
     }
     smoothSwitch (replacer) {
-        this.$el.style.transform = `translate3d(0,${replacer.getBoundingClientRect().top - this.getHeight()}px,0)`
+        this.$el.style.transform = `translate(0,${replacer.getBoundingClientRect().top - this.getHeight()}px)`
     }
     copyStyle (style1, style2, name) {
         if (style1[name] !== style2[name])
@@ -78,7 +78,7 @@ export default class Sticker {
         this.copyStyle(this.$el.style, stickyStyle, 'position')
         this.copyStyle(this.$el.style, stickyStyle, 'top')
         this.copyStyle(this.$el.style, stickyStyle, 'zIndex')
-        this.copyStyle(this.$el.style, {transform: 'translate3d(0,0,0)'}, 'transform')
+        this.copyStyle(this.$el.style, {transform: 'translate(0,0)'}, 'transform')
         if (this.className && !this.$el.className.match(new RegExp(this.className))) {
             this.$el.className += ` ${this.className}`
         }
@@ -89,7 +89,7 @@ export default class Sticker {
         this.copyStyle(this.$el.style, this.styleCache, 'top')
         this.copyStyle(this.$el.style, this.styleCache, 'zIndex')
         this.copyStyle(this.$holder.style, {height: '0px'}, 'height')
-        this.copyStyle(this.$el.style, {transform: 'translate3d(0,0,0)'}, 'transform')
+        this.copyStyle(this.$el.style, {transform: 'translate(0,0)'}, 'transform')
         if (this.className && this.$el.className.match(reg)) {
             this.$el.className = this.$el.className.replace(reg, '')
         }
