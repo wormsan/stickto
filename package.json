@@ -1,6 +1,6 @@
 {
   "name": "stickto",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "make elements stick to top automatically(多dom自动吸顶库)",
   "main": "dist/stickto.js",
   "scripts": {
